@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a22">
+  <title>Моя Домашка — горы Алматы</title>
+  <style>
+    :root{
+      --bg:#f4f1e8;--card:#fffdf8;--ink:#17211d;--muted:#65706a;
+      --green:#174b3b;--green2:#246b52;--cream:#e9dfc8;--line:#d9d5c9;
+      --danger:#9a3f2d;--shadow:0 14px 35px rgba(23,33,29,.10);--r:22px
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(180deg,#eef0e9 0,#f7f4eb 36%,var(--bg) 100%);
+      color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    .app{max-width:1180px;margin:auto;padding:18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 0 22px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:-.02em}
+    .logo{width:44px;height:44px;border-radius:15px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:22px}
+    .header-actions{display:flex;gap:8px}
+    .icon-btn,.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:11px 14px;font-weight:750}
+    .icon-btn:hover,.btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:var(--green);color:white;border-color:var(--green)}
+    .btn.soft{background:var(--cream);border-color:transparent}
+    .hero{background:var(--green);color:#fff;border-radius:30px;padding:34px;display:grid;grid-template-columns:1.4fr .8fr;gap:25px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+    .hero:after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;right:-130px;top:-160px;background:rgba(255,255,255,.07)}
+    .eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:800;opacity:.75}
+    h1{font-size:clamp(32px,5vw,58px);line-height:.98;margin:10px 0 15px;letter-spacing:-.045em}
+    .hero p{font-size:17px;line-height:1.55;max-width:620px;color:#dce9e2}
+    .hero-art{min-height:180px;display:grid;align-items:end;justify-items:end;position:relative}
+    .mountain-art{font-size:130px;filter:drop-shadow(0 14px 14px rgba(0,0,0,.15))}
+    .search-row{margin-top:18px;display:flex;gap:10px;max-width:720px}
+    .search{flex:1;background:#fff;border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:14px 16px;color:var(--ink);outline:none}
+    .search:focus{box-shadow:0 0 0 4px rgba(255,255,255,.13)}
+    main{padding:28px 0 60px}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:8px 0 16px}
+    h2{margin:0;font-size:27px;letter-spacing:-.03em}
+    .muted{color:var(--muted)}
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 12px;color:var(--muted);font-weight:700}
+    .chip.active{background:var(--green);border-color:var(--green);color:white}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .mountain-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 7px 20px rgba(23,33,29,.05);transition:.2s}
+    .mountain-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+    .card-top{height:170px;background:linear-gradient(145deg,#b6c8c0,#e9dfc8);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .card-top:before{content:"";position:absolute;inset:auto 0 0;height:80%;background:linear-gradient(145deg,transparent 20%,rgba(23,75,59,.9) 21% 43%,transparent 44%),linear-gradient(30deg,transparent 40%,rgba(23,75,59,.7) 41% 67%,transparent 68%)}
+    .peak-icon{font-size:78px;position:relative;z-index:1}
+    .fav{position:absolute;right:12px;top:12px;z-index:2;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.65);background:rgba(255,255,255,.88);font-size:19px}
+    .card-body{padding:18px}
+    .card-title{display:flex;justify-content:space-between;gap:10px}
+    .card-title h3{margin:0;font-size:21px}
+    .badge{font-size:11px;font-weight:850;background:#e5efe9;color:var(--green);padding:6px 8px;border-radius:8px;height:max-content}
+    .facts{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+    .fact{font-size:12px;color:var(--muted);background:#f3f0e7;padding:7px 9px;border-radius:9px}
+    .card-body p{color:var(--muted);line-height:1.45;font-size:14px;min-height:42px}
+    .card-actions{display:flex;gap:8px}
+    .card-actions .btn{flex:1}
+    .empty{padding:40px;text-align:center;border:1px dashed var(--line);border-radius:var(--r);background:rgba(255,255,255,.4);grid-column:1/-1}
+    .detail{display:none}
+    .detail.active{display:block}
+    .home.hidden{display:none}
+    .back{margin-bottom:16px}
+    .detail-hero{background:var(--green);color:white;border-radius:28px;padding:28px;display:grid;grid-template-columns:1fr .8fr;gap:20px}
+    .detail-hero h1{font-size:46px}
+    .detail-hero p{color:#dce9e2;line-height:1.55}
+    .detail-mountain{display:grid;place-items:center;font-size:150px;background:rgba(255,255,255,.07);border-radius:22px;min-height:250px}
+    .tabs{display:flex;gap:8px;overflow:auto;padding:14px 0;position:sticky;top:0;background:rgba(244,241,232,.92);backdrop-filter:blur(10px);z-index:5}
+    .tab{white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:10px 14px;font-weight:750}
+    .tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+    .detail-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
+    .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+    .panel h3{margin:0 0 12px;font-size:20px}
+    .route{border:1px solid var(--line);border-radius:17px;padding:15px;margin:10px 0}
+    .route-head{display:flex;justify-content:space-between;gap:10px}
+    .route h4{margin:0 0 7px}
+    .route p{margin:0;color:var(--muted);line-height:1.45;font-size:14px}
+    .list{margin:0;padding-left:20px;color:var(--muted);line-height:1.7}
+    .warning{background:#fff0e9;border:1px solid #f1c9bc;color:#733427;border-radius:16px;padding:14px;line-height:1.5}
+    .notice{background:#edf3ef;border:1px solid #d1dfd7;color:#315044;border-radius:16px;padding:14px;line-height:1.5}
+    footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:13px}
+    .modal{display:none;position:fixed;inset:0;background:rgba(11,20,16,.55);z-index:20;padding:20px;align-items:center;justify-content:center}
+    .modal.open{display:flex}
+    .modal-box{max-width:520px;width:100%;background:var(--card);border-radius:24px;padding:24px;box-shadow:0 25px 70px rgba(0,0,0,.3)}
+    .modal-head{display:flex;justify-content:space-between;gap:10px}
+    .close{border:0;background:transparent;font-size:25px}
+    .toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:12px 16px;border-radius:13px;opacity:0;pointer-events:none;transition:.25s;z-index:30}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .demo{font-size:11px;color:#8a5a17;background:#fff2d5;padding:4px 7px;border-radius:7px;font-weight:850}
+    @media(max-width:820px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .hero,.detail-hero,.detail-grid{grid-template-columns:1fr}
+      .hero-art{min-height:110px;display:none}
+      .detail-mountain{min-height:150px;font-size:100px}
+    }
+    @media(max-width:560px){
+      .app{padding:12px}
+      header{padding-bottom:14px}
+      .brand span{font-size:14px}
+      .hero{padding:24px;border-radius:23px}
+      h1{font-size:37px}
+      .search-row{flex-direction:column}
+      .grid{grid-template-columns:1fr}
+      .section-head{align-items:start;flex-direction:column}
+      .detail-hero{padding:21px;border-radius:23px}
+      .detail-hero h1{font-size:37px}
+      .card-top{height:145px}
+      .card-body p{min-height:0}
+      .header-actions .btn{padding:9px}
+      .header-actions .btn span{display:none}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><div class="logo">▲</div><span>МОЯ ДОМАШКА · ГОРЫ АЛМАТЫ</span></div>
+    <div class="header-actions">
+      <button class="btn" id="favFilter">♡ <span>Избранное</span></button>
+      <button class="btn soft" id="aboutBtn">О проекте</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="home" id="home">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">Горный справочник · офлайн-демо</div>
+          <h1>Выбери гору.<br>Подготовься.</h1>
+          <p>Удобный справочник для планирования похода: высота, сложность, варианты подъёма, что взять и на что обратить внимание.</p>
+          <div class="search-row">
+            <input class="search" id="search" placeholder="Найти гору, например «Кок-Жайляу»…" autocomplete="off">
+            <button class="btn primary" id="clearSearch">Сбросить</button>
+          </div>
+        </div>
+        <div class="hero-art"><div class="mountain-art">⛰️</div></div>
+      </div>
+
+      <div class="section-head">
+        <div><h2>Горы для изучения</h2><div class="muted">Демонстрационная подборка</div></div>
+        <div class="chips">
+          <button class="chip active" data-filter="all">Все</button>
+          <button class="chip" data-filter="easy">Легко</button>
+          <button class="chip" data-filter="medium">Средне</button>
+          <button class="chip" data-filter="hard">Сложно</button>
+        </div>
+      </div>
+      <div class="grid" id="mountainGrid"></div>
+    </section>
+
+    <section class="detail" id="detail">
+      <button class="btn back" id="backBtn">← Все горы</button>
+      <div id="detailContent"></div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>Важно:</strong> это учебная веб-демонстрация. Маршруты, время старта, высоты и советы ниже не являются актуальной сводкой условий. Перед реальным походом проверяй официальные предупреждения, погоду, состояние маршрута и требования конкретной территории.
+  </footer>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-head"><h2 id="modalTitle">О проекте</h2><button class="close" id="modalClose">×</button></div>
+    <div id="modalText"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+/*
+  МОЯ ДОМАШКА — самостоятельный статический демо-проект.
+  ВАЖНО: записи ниже — ДЕМО-ДАННЫЕ, специально помеченные как такие.
+  Их можно заменить на проверенную информацию без изменения интерфейса.
+*/
+
+const mountains = [
+  {
+    id:"kok-zhailyau", name:"Кок-Жайляу", alt:"Көкжайлау", height:"≈ 2 250 м", level:"easy",
+    levelText:"Легко / средне", area:"Медеу — урочище",
+    intro:"Популярное направление для знакомства с горными маршрутами и панорамами Заилийского Алатау.",
+    routes:[
+      {name:"Пеший маршрут",time:"Демо: 3–5 ч в одну сторону",note:"Постепенный набор высоты; точная продолжительность зависит от точки старта, темпа и условий."},
+      {name:"Короткий вариант",time:"Демо: зависит от старта",note:"Подходит для более спокойного дня, если цель — не вершина, а прогулка по урочищу."}
+    ],
+    take:["вода и запасной перекус","слои одежды + дождевик","удобная обувь с хорошим сцеплением","заряженный телефон и небольшой power bank","небольшая аптечка"],
+    know:["Погода в горах меняется быстрее, чем в городе.","Не уходи с понятного маршрута ради короткого пути.","Если чувствуешь слабость, головокружение или сильную одышку — остановись и сообщи взрослому/товарищу.","Не рассчитывай только на телефон: связь может пропадать."]
+  },
+  {
+    id:"furmanovka", name:"Фурмановка", alt:"Пик Фурманова", height:"≈ 3 200 м", level:"medium",
+    levelText:"Средне", area:"Заилийский Алатау",
+    intro:"Горный маршрут с заметным набором высоты. Требует лучшей физической подготовки и раннего планирования.",
+    routes:[
+      {name:"Классический пеший вариант",time:"Демо: 6–9 ч туда-обратно",note:"Продолжительность сильно зависит от сезона, состояния тропы и темпа группы."},
+      {name:"Сокращённый день",time:"Демо: по условиям",note:"Можно выбрать более короткую цель и развернуться раньше, не стремясь обязательно к вершине."}
+    ],
+    take:["2+ л воды как ориентир для длительного дня","питательный перекус/обед","ветрозащитный слой","солнцезащита","фонарь на случай задержки","карта маршрута, сохранённая заранее"],
+    know:["Высота и холод могут ощущаться сильнее при усталости.","Не планируй возвращение в темноте без необходимости.","Для подростков и новичков особенно важны группа и взрослый, знающий маршрут.","При плохой погоде безопаснее изменить план."]
+  },
+  {
+    id:"butakovka", name:"Бутаковский водопад", alt:"Бутаковское ущелье", height:"≈ 1 850–2 000 м", level:"easy",
+    levelText:"Легко", area:"Бутаковское ущелье",
+    intro:"Хороший вариант для короткого горного дня, если нужен более спокойный маршрут без цели покорить высокую вершину.",
+    routes:[
+      {name:"До водопада",time:"Демо: 2–4 ч туда-обратно",note:"Обычно маршрут выбирают как прогулку по ущелью; время зависит от сезона и старта."},
+      {name:"Прогулка по ущелью",time:"Демо: гибкое",note:"Можно заранее выбрать точку разворота и не идти дальше при ухудшении погоды."}
+    ],
+    take:["вода","перекус","удобная обувь","лёгкая ветровка","телефон с зарядом"],
+    know:["После дождя камни и грунт могут быть скользкими.","Не подходи близко к краю воды/склонов.","Не оставляй мусор и не повреждай растения.","Если идёшь один, сообщи близкому человеку план и время возвращения."]
+  },
+  {
+    id:"talgar", name:"Талгарский пик", alt:"Пик Талгар", height:"≈ 4 979 м", level:"hard",
+    levelText:"Сложно", area:"Центральный Заилийский Алатау",
+    intro:"Высокогорная цель. В реальном проекте здесь особенно нужны проверенные альпинистские данные и профессиональная оценка условий.",
+    routes:[
+      {name:"Высокогорный маршрут",time:"Демо-описание",note:"Не является инструкцией к восхождению. Для реального восхождения нужны квалифицированные участники, актуальная информация и подходящее снаряжение."},
+      {name:"Учебный вариант",time:"Демо: не задан",note:"Для новичка безопаснее выбрать маршрут ниже и набрать опыт постепенно."}
+    ],
+    take:["высокогорное снаряжение по условиям","навигация и резервный план","защита от холода и солнца","достаток воды и еды","аптечка и средства связи"],
+    know:["На большой высоте возрастает риск проблем из-за холода, высоты и погоды.","Не используй этот экран как руководство по альпинизму.","Для сложных восхождений нужны подготовка, опыт и профессиональное сопровождение.","При плохом самочувствии нужно прекращать подъём и спускаться с помощью подготовленных участников."]
+  },
+  {
+    id:"big-almaty-peak", name:"Большой Алматинский пик", alt:"БАП", height:"≈ 3 680 м", level:"hard",
+    levelText:"Сложно", area:"Близ БАО",
+    intro:"Высокогорное направление рядом с Большим Алматинским озером. Доступ и правила территории нужно проверять перед поездкой.",
+    routes:[
+      {name:"Демонстрационный маршрут",time:"Демо: 7–10 ч",note:"Цифры вымышлены для интерфейса и не должны использоваться для планирования реального восхождения."},
+      {name:"Подход без вершины",time:"Демо: по условиям",note:"Для обычной прогулки разумно заранее выбрать безопасную точку разворота."}
+    ],
+    take:["вода и еда","тёплые слои","ветро- и влагозащита","солнцезащита","офлайн-карта","фонарь и запас заряда"],
+    know:["В районе БАО действуют правила территории и могут быть ограничения.","Состояние дороги и тропы меняется по сезону.","Высота, холод и ветер требуют осторожности.","Проверяй актуальные ограничения у официальных источников перед выездом."]
+  },
+  {
+    id:"kumbel", name:"Кумбель", alt:"Пик Кумбель", height:"≈ 3 200 м", level:"medium",
+    levelText:"Средне", area:"Заилийский Алатау",
+    intro:"Демонстрационная карточка для маршрутов средней сложности с видами на горные хребты.",
+    routes:[
+      {name:"Пеший маршрут",time:"Демо: 5–8 ч",note:"Данные времени вымышлены; реальное время зависит от маршрута, сезона и группы."},
+      {name:"Точка разворота",time:"Демо: гибкое",note:"Хорошая стратегия — заранее определить максимальное время подъёма и время обязательного разворота."}
+    ],
+    take:["вода","перекус","тёплый слой","дождевик","перчатки в прохладный сезон","заряженный телефон"],
+    know:["Следи за погодой и временем возвращения.","Не переоценивай силы на подъёме.","В группе держитесь вместе и заранее договоритесь о точке сбора.","При ухудшении условий выбирай безопасный спуск."]
+  }
+];
+
+let state = {filter:"all", search:"", favorites:[]};
+try { state.favorites = JSON.parse(localStorage.getItem("myHomeworkFavorites") || "[]"); }
+catch(e){ state.favorites=[]; }
+
+const grid = document.getElementById("mountainGrid");
+const search = document.getElementById("search");
+const toast = document.getElementById("toast");
+
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+function saveFav(){
+  try { localStorage.setItem("myHomeworkFavorites", JSON.stringify(state.favorites)); }
+  catch(e){ toastMsg("Избранное не сохранилось в браузере — остальные функции работают."); }
+}
+function isFav(id){return state.favorites.includes(id);}
+function toggleFav(id){
+  state.favorites=isFav(id)?state.favorites.filter(x=>x!==id):[...state.favorites,id];
+  saveFav(); render();
+  toastMsg(isFav(id)?"Добавлено в избранное":"Удалено из избранного");
+}
+function toastMsg(msg){
+  toast.textContent=msg;toast.classList.add("show");
+  clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.classList.remove("show"),2200);
+}
+function filtered(){
+  const q=state.search.trim().toLowerCase();
+  return mountains.filter(m=>{
+    const matchFilter=state.filter==="all" || m.level===state.filter;
+    const matchSearch=!q || [m.name,m.alt,m.area,m.intro].join(" ").toLowerCase().includes(q);
+    const matchFav=!state.showFav || isFav(m.id);
+    return matchFilter && matchSearch && matchFav;
+  });
+}
+function render(){
+  const list=filtered();
+  if(!list.length){
+    grid.innerHTML=`<div class="empty"><div style="font-size:40px">🔎</div><h3>Ничего не найдено</h3><p class="muted">Попробуй другое название или сбрось фильтры.</p><button class="btn primary" onclick="resetFilters()">Показать все</button></div>`;
+    return;
+  }
+  grid.innerHTML=list.map(m=>`
+    <article class="mountain-card">
+      <div class="card-top">
+        <button class="fav" aria-label="${isFav(m.id)?"Убрать из избранного":"Добавить в избранное"}" onclick="toggleFav('${m.id}')">${isFav(m.id)?"♥":"♡"}</button>
+        <div class="peak-icon">⛰</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title"><h3>${esc(m.name)}</h3><span class="badge">${esc(m.levelText)}</span></div>
+        <div class="facts"><span class="fact">${esc(m.height)}</span><span class="fact">${esc(m.area)}</span></div>
+        <p>${esc(m.intro)}</p>
+        <div class="card-actions"><button class="btn primary" onclick="openMountain('${m.id}')">Открыть</button><button class="btn" onclick="toggleFav('${m.id}')">${isFav(m.id)?"♥":"♡"}</button></div>
+      </div>
+    </article>`).join("");
+}
+function resetFilters(){
+  state.filter="all";state.search="";state.showFav=false;search.value="";
+  document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));
+  document.getElementById("favFilter").innerHTML='♡ <span>Избранное</span>';render();
+}
+function openMountain(id){
+  const m=mountains.find(x=>x.id===id); if(!m)return;
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("detail").classList.add("active");
+  document.getElementById("detailContent").innerHTML=`
+    <div class="detail-hero">
+      <div>
+        <span class="demo">ДАННЫЕ ДЕМО</span>
+        <div class="eyebrow" style="margin-top:12px">${esc(m.area)}</div>
+        <h1>${esc(m.name)}</h1>
+        <p>${esc(m.intro)}</p>
+        <div class="facts"><span class="fact" style="background:rgba(255,255,255,.12);color:white">${esc(m.height)}</span><span class="fact" style="background:rgba(255,255,255,.12);color:white">${esc(m.levelText)}</span></div>
+        <button class="btn" onclick="toggleFav('${m.id}')">${isFav(m.id)?"♥ В избранном":"♡ Добавить в избранное"}</button>
+      </div>
+      <div class="detail-mountain">⛰️</div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-tab="routes">Маршруты</button>
+      <button class="tab" data-tab="pack">Что взять</button>
+      <button class="tab" data-tab="safety">Здоровье и безопасность</button>
+      <button class="tab" data-tab="start">Когда стартовать</button>
+    </div>
+    <div class="detail-grid">
+      <div class="panel" id="tabContent"></div>
+      <aside class="panel">
+        <h3>Перед выходом</h3>
+        <div class="warning"><strong>Не воспринимай демо-время как прогноз.</strong><br>Проверь погоду, предупреждения, правила территории, состояние дороги/тропы и связь.</div>
+        <div style="height:10px"></div>
+        <div class="notice"><strong>Правило разворота</strong><br>Заранее реши, во сколько нужно повернуть назад, чтобы не возвращаться в темноте.</div>
+      </aside>
+    </div>`;
+  bindTabs(m);
+  showTab(m,"routes");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function bindTabs(m){
+  document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");showTab(m,t.dataset.tab);
+  }));
+}
+function showTab(m,tab){
+  const box=document.getElementById("tabContent");if(!box)return;
+  if(tab==="routes") box.innerHTML=`<h3>Варианты подъёма</h3><p class="muted">Это учебные описания. Для реального похода используй актуальные проверенные треки.</p>${m.routes.map(r=>`<div class="route"><div class="route-head"><h4>${esc(r.name)}</h4><span class="badge">${esc(r.time)}</span></div><p>${esc(r.note)}</p></div>`).join("")}`;
+  if(tab==="pack") box.innerHTML=`<h3>Что взять с собой</h3><ul class="list">${m.take.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="notice" style="margin-top:15px">Состав рюкзака зависит от сезона, длины маршрута и погоды.</div>`;
+  if(tab==="safety") box.innerHTML=`<h3>Здоровье и безопасность</h3><ul class="list">${m.know.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="warning" style="margin-top:15px"><strong>Если стало плохо:</strong> остановись, оцени состояние и сообщи группе. При серьёзных симптомах обращайтесь за экстренной помощью.</div>`;
+  if(tab==="start") box.innerHTML=`<h3>Когда начинать</h3><div class="route"><h4>Демонстрационное правило</h4><p>Для длительного горного дня обычно полезно планировать ранний старт, чтобы оставить запас времени на возвращение до темноты. <strong>Точное время здесь намеренно не задано как факт.</strong></p></div><div class="route"><h4>Проверь утром</h4><p>Погоду и предупреждения, видимость, ветер, температуру, состояние маршрута, ограничения территории и план связи.</p></div>`;
+}
+document.getElementById("backBtn").onclick=()=>{
+  document.getElementById("detail").classList.remove("active");
+  document.getElementById("home").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+search.addEventListener("input",e=>{state.search=e.target.value;render()});
+document.getElementById("clearSearch").onclick=()=>resetFilters();
+document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+  state.filter=c.dataset.filter;
+  document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===c));
+  render();
+}));
+document.getElementById("favFilter").onclick=()=>{
+  state.showFav=!state.showFav;
+  document.getElementById("favFilter").innerHTML=state.showFav?'♥ <span>Избранное</span>':'♡ <span>Избранное</span>';
+  render();
+};
+document.getElementById("aboutBtn").onclick=()=>{
+  document.getElementById("modalTitle").textContent="О проекте";
+  document.getElementById("modalText").innerHTML=`<p><strong>Моя Домашка</strong> — статическая демонстрация идеи справочника по горам Алматы.</p><p>Всё работает без сервера, API и внешних библиотек. Избранное сохраняется только в браузере этого устройства, если браузер разрешает localStorage.</p><p><strong>Что не подключено:</strong> карты, GPS, погода, аккаунты, онлайн-ИИ и актуальные данные о маршрутах. Они не имитируются как работающие.</p><p><span class="demo">ДАННЫЕ ДЕМО</span> — значения, которые нужно заменить проверенной информацией перед публикацией как реального туристического сервиса.</p>`;
+  document.getElementById("modal").classList.add("open");
+};
+document.getElementById("modalClose").onclick=()=>document.getElementById("modal").classList.remove("open");
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")e.target.classList.remove("open")});
+state.showFav=false; render();
+</script>
+</body>
+</html>
