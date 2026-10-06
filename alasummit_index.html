@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#123d31">
+<title>ALASUMMIT — Alatau Peaks</title>
+<style>
+:root{--bg:#f4f1e8;--card:#fffdf8;--ink:#17211d;--muted:#66736d;--green:#123d31;--green2:#216b53;--line:#d8d5ca;--cream:#e9dfc8;--red:#8f3828;--shadow:0 16px 40px #17211d14;--r:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#edf1eb,#f7f3e9);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}button{cursor:pointer}.app{max-width:1180px;margin:auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0 18px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.02em}.logo{width:43px;height:43px;border-radius:14px;background:var(--green);color:#fff;display:grid;place-items:center}.actions{display:flex;gap:7px;flex-wrap:wrap}
+.btn,.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:13px;padding:10px 13px;font-weight:800}.btn.primary{background:var(--green);color:white;border-color:var(--green)}.btn.soft{background:var(--cream);border-color:transparent}.btn:disabled{opacity:.45;cursor:not-allowed}
+.hero{background:var(--green);color:white;border-radius:29px;padding:31px;display:grid;grid-template-columns:1.25fr .75fr;gap:22px;box-shadow:var(--shadow)}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:11px;font-weight:900;opacity:.72}h1{font-size:clamp(36px,5vw,58px);line-height:.97;letter-spacing:-.05em;margin:10px 0 15px}.hero p{color:#dce9e2;line-height:1.55;max-width:650px}.hero-art{display:grid;place-items:center;font-size:145px}
+.searchrow{display:flex;gap:9px;margin-top:18px}.search{flex:1;border:0;border-radius:14px;padding:14px 15px;outline:0}.search:focus{box-shadow:0 0 0 4px #ffffff22}
+main{padding:25px 0 50px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:8px 0 16px}h2{margin:0;font-size:27px;letter-spacing:-.03em}.muted{color:var(--muted)}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip.active{background:var(--green);color:#fff;border-color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 7px 20px #17211d0d;transition:.18s}.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.photo{height:185px;background:#c9d2cc;position:relative;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover;display:block}.photo .level{position:absolute;left:12px;top:12px;background:#ffffffdf;color:var(--green);padding:6px 8px;border-radius:9px;font-size:11px;font-weight:900}.fav{position:absolute;right:12px;top:12px;width:39px;height:39px;border:0;border-radius:50%;background:#ffffffdf;font-size:18px}
+.body{padding:17px}.title{display:flex;justify-content:space-between;gap:8px}.title h3{margin:0;font-size:20px}.facts{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.fact{background:#f1eee6;color:var(--muted);padding:6px 8px;border-radius:8px;font-size:12px}.body p{color:var(--muted);line-height:1.45;font-size:14px;min-height:40px}.cardbuttons{display:flex;gap:7px}.cardbuttons .btn:first-child{flex:1}
+.empty{grid-column:1/-1;padding:42px;text-align:center;border:1px dashed var(--line);border-radius:var(--r)}.detail{display:none}.detail.active{display:block}.home.hidden{display:none}.back{margin-bottom:14px}
+.detailhero{background:var(--green);color:#fff;border-radius:27px;overflow:hidden;display:grid;grid-template-columns:1fr .9fr}.detailhero .copy{padding:28px}.detailhero .copy p{color:#dce9e2;line-height:1.55}.detailphoto{min-height:300px}.detailphoto img{width:100%;height:100%;object-fit:cover}.tag{display:inline-block;background:#ffffff1c;border:1px solid #ffffff2b;border-radius:8px;padding:5px 8px;font-size:11px;font-weight:900}
+.tabs{display:flex;gap:8px;overflow:auto;padding:13px 0;position:sticky;top:0;background:#f4f1e8ed;backdrop-filter:blur(9px);z-index:4}.tab{white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:10px 14px;font-weight:800}.tab.active{background:var(--green);color:white;border-color:var(--green)}
+.twocol{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}.panel h3{margin:0 0 11px}.route{border:1px solid var(--line);border-radius:16px;padding:14px;margin:9px 0}.route h4{margin:0 0 7px}.route p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}.list{margin:0;padding-left:20px;color:var(--muted);line-height:1.7}.notice{background:#edf3ef;border:1px solid #d1dfd7;color:#315044;border-radius:15px;padding:13px;line-height:1.5}.warning{background:#fff0e9;border:1px solid #f0c8ba;color:#733427;border-radius:15px;padding:13px;line-height:1.5}
+.gpsbox{background:#101b17;color:#e8f3ed;border-radius:19px;padding:16px}.gpsgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.gpsstat{background:#ffffff0c;border-radius:12px;padding:10px}.gpsstat small{display:block;color:#9db1a8}.gpsstat strong{display:block;margin-top:3px}.mapbox{height:340px;border:1px solid var(--line);border-radius:18px;background:repeating-linear-gradient(0deg,#f8f5ec,#f8f5ec 39px,#e9e4d7 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,#e9e4d7 40px);overflow:hidden;position:relative}.mapbox svg{width:100%;height:100%}.maphint{position:absolute;left:12px;top:12px;background:#fffdf8dd;border:1px solid var(--line);padding:8px 10px;border-radius:10px;font-size:12px;font-weight:800}
+input[type=file]{display:none}.filelabel{display:inline-block}.small{font-size:12px;color:var(--muted)}footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-size:12px;line-height:1.6}
+.modal{display:none;position:fixed;inset:0;background:#0b141099;z-index:30;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.modalbox{max-width:540px;width:100%;background:var(--card);border-radius:24px;padding:23px;max-height:88vh;overflow:auto}.modalhead{display:flex;justify-content:space-between}.close{border:0;background:transparent;font-size:25px}.langgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.lang{padding:18px;border:1px solid var(--line);border-radius:16px;background:white;font-weight:900}.lang:hover{background:var(--cream)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:white;padding:12px 15px;border-radius:12px;opacity:0;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.hero,.detailhero,.twocol{grid-template-columns:1fr}.hero-art{display:none}}
+@media(max-width:560px){.app{padding:11px}.grid{grid-template-columns:1fr}.searchrow{flex-direction:column}.section-head{align-items:start;flex-direction:column}.gpsgrid{grid-template-columns:1fr 1fr}.detailhero .copy{padding:21px}.detailphoto{min-height:220px}.actions .btn span{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand"><div class="logo">▲</div><span>ALASUMMIT</span></div>
+  <div class="actions">
+    <button class="btn" id="langBtn">🌐 <span>Language</span></button>
+    <button class="btn" id="gpsTop">◎ <span>GPS</span></button>
+    <button class="btn soft" id="favTop">♡ <span>Favorites</span></button>
+  </div>
+</header>
+
+<main>
+<section id="home" class="home">
+  <div class="hero">
+    <div>
+      <div class="eyebrow" data-i="eyebrow">Alatau hiking companion</div>
+      <h1 data-i="heroTitle">Choose a peak.<br>Know the route.</h1>
+      <p data-i="heroText">Explore the 15 peaks of the “My 15 Alatau Peaks” program, prepare your hike, and use GPS with a locally loaded trail even when you are offline.</p>
+      <div class="searchrow"><input class="search" id="search" data-i-placeholder="search" placeholder="Search a peak…"><button class="btn primary" id="clear" data-i="reset">Reset</button></div>
+    </div>
+    <div class="hero-art">🏔️</div>
+  </div>
+
+  <div class="section-head">
+    <div><h2 data-i="peaks">15 Alatau Peaks</h2><div class="muted" data-i="subtitle">Bronze · Silver · Gold</div></div>
+    <div class="chips">
+      <button class="chip active" data-filter="all" data-i="all">All</button>
+      <button class="chip" data-filter="bronze" data-i="bronze">Bronze</button>
+      <button class="chip" data-filter="silver" data-i="silver">Silver</button>
+      <button class="chip" data-filter="gold" data-i="gold">Gold</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="detail" class="detail">
+  <button class="btn back" id="back" data-i="allPeaks">← All peaks</button>
+  <div id="detailContent"></div>
+</section>
+</main>
+
+<footer>
+  <strong>ALASUMMIT</strong> — <span data-i="footer1">educational prototype.</span>
+  <span data-i="footer2">Peak difficulty and heights are based on published descriptions of the “My 15 Alatau Peaks” program. Real trail conditions can change.</span>
+  <br><span data-i="footer3">GPS can receive satellite coordinates without internet on some devices. A browser cannot guarantee GPS availability offline, and a full offline basemap requires locally bundled map data.</span>
+</footer>
+</div>
+
+<div class="modal" id="modal"><div class="modalbox"><div class="modalhead"><h2 id="modalTitle">Language</h2><button class="close" id="close">×</button></div><div id="modalBody"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+/* 15 peaks: the published “My 15 Alatau Peaks” list.
+   Source used for this prototype: MK Kazakhstan, 26 Jun 2024.
+   Photos use real Wikimedia Commons photographs where available.
+   For a production offline build, download/licence the photos and bundle them locally. */
+
+const peaks=[
+{id:"chimbulachka",name:"Chimbulachka",kk:"Шымбұлақ шыңы",ru:"Чимбулачка",en:"Chimbulachka",height:"≈3,450 m",level:"bronze",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Chimbulachka%20Peak.jpg?width=1000",credit:"Wikimedia Commons",desc:"A high ridge peak associated with the Shymbulak area.",kkd:"Шымбұлақ аймағымен байланысты биік жота шыңы.",rud:"Высокая вершина в районе Шымбулака."},
+{id:"big-almaty",name:"Big Almaty Peak",kk:"Үлкен Алматы шыңы",ru:"Большой Алматинский пик",en:"Big Almaty Peak",height:"≈3,680 m",level:"bronze",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Big%20Almaty%20peak.jpg?width=1000",credit:"Wikimedia Commons",desc:"A major high point near the Big Almaty Lake area.",kkd:"Үлкен Алматы көлі аймағындағы биік шың.",rud:"Высокая вершина в районе Большого Алматинского озера."},
+{id:"kumbel",name:"Kumbel",kk:"Күмбел",ru:"Кумбель",en:"Kumbel",height:"≈3,200 m",level:"bronze",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Kumbel%20Peak%20-plate.jpg?width=1000",credit:"Wikimedia Commons",desc:"A popular ridge peak reached from the Kok-Zhailau side.",kkd:"Көкжайлау жағынан жетуге болатын танымал жота шыңы.",rud:"Популярная вершина на хребте со стороны Кок-Жайляу."},
+{id:"bukreev",name:"Bukreev Peak",kk:"Букреев шыңы",ru:"Пик Букреева",en:"Bukreev Peak",height:"≈3,010 m",level:"bronze",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Boukreev%201.jpg?width=1000",credit:"Wikimedia Commons",desc:"A well-known peak named after mountaineer Anatoly Bukreev.",kkd:"Альпинист Анатолий Букреевтің атымен аталған белгілі шың.",rud:"Известная вершина, названная в честь альпиниста Анатолия Букреева."},
+{id:"furmanov",name:"Furmanov Peak",kk:"Фурманов шыңы",ru:"Пик Фурманова",en:"Furmanov Peak",height:"≈3,053 m",level:"bronze",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Furmanov%20peak%20with%20view%20on%20Talgar%20peak.jpg?width=1000",credit:"Wikimedia Commons",desc:"One of the most popular hiking peaks near Medeu.",kkd:"Медеу маңындағы ең танымал жаяу бағыттардың бірі.",rud:"Одна из самых популярных вершин для походов возле Медеу."},
+{id:"titov",name:"Titov Peak",kk:"Титов шыңы",ru:"Пик Титова",en:"Titov Peak",height:"≈3,871 m",level:"silver",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/View%20of%20Titov%20lakes%20from%20Peak%20Titov.jpg?width=1000",credit:"Wikimedia Commons",desc:"A higher peak requiring more preparation than the bronze group.",kkd:"Қола деңгейіне қарағанда көбірек дайындықты қажет ететін биік шың.",rud:"Более высокая вершина, требующая большей подготовки."},
+{id:"tourist",name:"Tourist Peak",kk:"Турист шыңы",ru:"Пик Турист",en:"Tourist Peak",height:"≈3,954 m",level:"silver",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Stunning%20mountain%20view.jpg?width=1000",credit:"Wikimedia Commons",desc:"A high-altitude goal from the silver group.",kkd:"Күміс деңгейіндегі биіктік мақсаты.",rud:"Высотная цель серебряной группы."},
+{id:"sovetov",name:"Sovetov Peak",kk:"Кеңестер шыңы",ru:"Пик Советов",en:"Sovetov Peak",height:"≈4,317 m",level:"silver",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Sovetov%20peak%201.jpg?width=1000",credit:"Wikimedia Commons",desc:"A 4,000+ metre peak. High-altitude conditions matter.",kkd:"4000 метрден жоғары шың. Биіктік жағдайын ескеру керек.",rud:"Вершина выше 4000 м. Нужно учитывать высотные условия."},
+{id:"karnizny",name:"Karnizny Peak",kk:"Карнизный шыңы",ru:"Пик Карнизный",en:"Karnizny Peak",height:"≈4,075 m",level:"silver",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/View%20of%20the%20peak%20Talgar%20from%20national%20park.jpg?width=1000",credit:"Wikimedia Commons",desc:"A high silver-level peak; route details must be checked before a real climb.",kkd:"Күміс деңгейіндегі биік шың; нақты маршрутты алдын ала тексеру керек.",rud:"Высокая вершина серебряного уровня; реальный маршрут нужно проверять заранее."},
+{id:"panfilov",name:"Panfilov Heroes Peak",kk:"Панфилов батырлары шыңы",ru:"Пик Героев Панфиловцев",en:"Panfilov Heroes Peak",height:"≈4,120 m",level:"silver",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Big%20Almaty%20peak%2C%20may%202019.jpg?width=1000",credit:"Wikimedia Commons",desc:"A high peak in the silver group; not a beginner route.",kkd:"Күміс деңгейіндегі биік шың; жаңадан бастаушыға арналған маршрут емес.",rud:"Высокая вершина серебряной группы; не маршрут для новичка."},
+{id:"nursultan",name:"Nursultan Peak",kk:"Нұрсұлтан шыңы",ru:"Пик Нурсултан",en:"Nursultan Peak",height:"≈4,376 m",level:"gold",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Пик%20Нурсултан.jpg?width=1000",credit:"Wikimedia Commons",desc:"A demanding high-altitude peak for experienced mountaineers.",kkd:"Тәжірибелі альпинистерге арналған күрделі биік шың.",rud:"Сложная высотная вершина для опытных альпинистов."},
+{id:"molodezhny",name:"Molodezhny Peak",kk:"Молодёжный шыңы",ru:"Пик Молодёжный",en:"Molodezhny Peak",height:"≈4,147 m",level:"gold",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Molodyozhnyj%20peak.jpg?width=1000",credit:"Wikimedia Commons",desc:"A high and demanding summit.",kkd:"Биік әрі күрделі шың.",rud:"Высокая и сложная вершина."},
+{id:"khrishchatogo",name:"Khrishchatogo Peak",kk:"Хрищатого шыңы",ru:"Пик Хрищатого",en:"Khrishchatogo Peak",height:"≈3,950 m",level:"gold",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/View%20of%20Titov%20lakes%20from%20Peak%20Titov.jpg?width=1000",credit:"Wikimedia Commons",desc:"A gold-level peak; this card is an informational placeholder until a dedicated verified photo is selected.",kkd:"Алтын деңгейіндегі шың; арнайы тексерілген фото кейін таңдалады.",rud:"Вершина золотого уровня; отдельное проверенное фото будет добавлено позже."},
+{id:"kargalinsky",name:"Kargalinsky Peak",kk:"Қарғалы шыңы",ru:"Карчалинский / Каргалинский пик",en:"Kargalinsky Peak",height:"≈3,675 m",level:"gold",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Вид%20с%20пика%20Скалистый.%20Облака%20плывут.jpg?width=1000",credit:"Wikimedia Commons",desc:"A gold-level peak requiring strong preparation.",kkd:"Алтын деңгейіндегі, жақсы дайындықты қажет ететін шың.",rud:"Вершина золотого уровня, требующая хорошей подготовки."},
+{id:"kamensky",name:"Kamensky Peak",kk:"Каменский шыңы",ru:"Пик Каменский",en:"Kamensky Peak",height:"≈3,674 m",level:"gold",photo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Виды%20на%20горы%20с%20высоты.jpg?width=1000",credit:"Wikimedia Commons",desc:"A gold-level peak; use current professional route information for any real ascent.",kkd:"Алтын деңгейіндегі шың; нақты көтерілу үшін кәсіби әрі өзекті ақпарат керек.",rud:"Вершина золотого уровня; для реального восхождения нужна актуальная профессиональная информация."}
+];
+
+const tr={
+en:{eyebrow:"Alatau hiking companion",heroTitle:"Choose a peak.<br>Know the route.",heroText:"Explore the 15 peaks of the “My 15 Alatau Peaks” program, prepare your hike, and use GPS with a locally loaded trail even when you are offline.",search:"Search a peak…",reset:"Reset",peaks:"15 Alatau Peaks",subtitle:"Bronze · Silver · Gold",all:"All",bronze:"Bronze",silver:"Silver",gold:"Gold",allPeaks:"← All peaks",routes:"Route",gear:"What to take",safety:"Safety",start:"Start plan",gps:"Offline GPS",load:"Load a GPX trail",startGPS:"Start GPS",stopGPS:"Stop GPS",offline:"Offline trail view",noTrack:"No trail loaded yet. Import a GPX file from your phone.",choose:"Choose language",footer1:"educational prototype.",footer2:"Peak difficulty and heights are based on published descriptions of the “My 15 Alatau Peaks” program. Real trail conditions can change.",footer3:"GPS can receive satellite coordinates without internet on some devices. A browser cannot guarantee GPS availability offline, and a full offline basemap requires locally bundled map data.",demo:"REAL PHOTO · WEB SOURCE",demo2:"This photo is shown from Wikimedia Commons. For a truly offline single-file release, bundle licensed image files locally.",notVerified:"Route data is not bundled here because inventing trail coordinates would be unsafe.",accuracy:"Accuracy",lat:"Latitude",lon:"Longitude",alt:"Altitude",status:"Status",waiting:"Waiting for GPS…",active:"GPS active",denied:"Location permission denied",unsupported:"Geolocation is not supported by this browser.",loadOk:"GPX trail loaded and ready for offline viewing.",badGpx:"Could not read this GPX file.",noFav:"No favorites yet."},
+ru:{eyebrow:"Горный помощник Алатау",heroTitle:"Выбери вершину.<br>Знай маршрут.",heroText:"15 вершин программы «Мои 15 вершин Алатау»: подготовка, безопасность и GPS с локально загруженным треком даже без интернета.",search:"Найти вершину…",reset:"Сбросить",peaks:"15 вершин Алатау",subtitle:"Бронза · Серебро · Золото",all:"Все",bronze:"Бронза",silver:"Серебро",gold:"Золото",allPeaks:"← Все вершины",routes:"Маршрут",gear:"Что взять",safety:"Безопасность",start:"План старта",gps:"Офлайн GPS",load:"Загрузить GPX-трек",startGPS:"Запустить GPS",stopGPS:"Остановить GPS",offline:"Офлайн-вид трека",noTrack:"Трек не загружен. Выбери GPX-файл на телефоне.",choose:"Выбери язык",footer1:"учебный прототип.",footer2:"Сложность и высоты основаны на опубликованном описании программы «Мои 15 вершин Алатау». Реальные условия троп могут меняться.",footer3:"GPS может получать координаты со спутников без интернета на некоторых устройствах. Браузер не гарантирует работу GPS офлайн, а полноценная офлайн-карта требует локальных карт.",demo:"РЕАЛЬНОЕ ФОТО · ВЕБ-ИСТОЧНИК",demo2:"Фото показывается из Wikimedia Commons. Для полностью офлайн-версии нужно встроить лицензированные файлы фото.",notVerified:"Маршрутные координаты здесь не выдуманы: для реального трека нужен проверенный GPX.",accuracy:"Точность",lat:"Широта",lon:"Долгота",alt:"Высота",status:"Статус",waiting:"Ожидание GPS…",active:"GPS работает",denied:"Доступ к геолокации запрещён",unsupported:"Этот браузер не поддерживает геолокацию.",loadOk:"GPX-трек загружен и готов для офлайн-просмотра.",badGpx:"Не удалось прочитать GPX-файл.",noFav:"Избранных вершин пока нет."},
+kk:{eyebrow:"Алатауға арналған тау көмекшісі",heroTitle:"Шыңды таңда.<br>Маршрутты біл.",heroText:"«Алатаудың 15 шыңы» бағдарламасындағы 15 шыңды зертте, жорыққа дайындал және интернетсіз жергілікті GPX трекпен GPS қолдан.",search:"Шыңды іздеу…",reset:"Тазарту",peaks:"Алатаудың 15 шыңы",subtitle:"Қола · Күміс · Алтын",all:"Барлығы",bronze:"Қола",silver:"Күміс",gold:"Алтын",allPeaks:"← Барлық шың",routes:"Маршрут",gear:"Не алу керек",safety:"Қауіпсіздік",start:"Бастау жоспары",gps:"Офлайн GPS",load:"GPX трегін жүктеу",startGPS:"GPS іске қосу",stopGPS:"GPS тоқтату",offline:"Офлайн трек көрінісі",noTrack:"Трек әлі жүктелмеді. Телефоннан GPX файлын таңда.",choose:"Тілді таңда",footer1:"оқу прототипі.",footer2:"Шыңдардың қиындығы мен биіктігі «Алатаудың 15 шыңы» бағдарламасының жарияланған сипаттамасына негізделген. Нақты жағдай өзгеруі мүмкін.",footer3:"Кейбір құрылғыларда GPS интернетсіз спутниктен координата ала алады. Браузер офлайн GPS-ке кепілдік бермейді, ал толық офлайн карта үшін жергілікті карта деректері керек.",demo:"ШЫН ФОТО · ВЕБ-ДЕРЕККӨЗ",demo2:"Фото Wikimedia Commons-тан көрсетіледі. Толық офлайн нұсқа үшін лицензияланған фото файлдарын сайтқа жергілікті енгізу керек.",notVerified:"Қауіпсіздік үшін маршрут координаттары ойдан шығарылмаған: нақты трекке тексерілген GPX керек.",accuracy:"Дәлдік",lat:"Ендік",lon:"Бойлық",alt:"Биіктік",status:"Күйі",waiting:"GPS күтілуде…",active:"GPS жұмыс істеп тұр",denied:"Геолокацияға рұқсат берілмеді",unsupported:"Бұл браузер геолокацияны қолдамайды.",loadOk:"GPX трегі жүктелді және офлайн көруге дайын.",badGpx:"GPX файлын оқу мүмкін болмады.",noFav:"Таңдаулы шыңдар әзірге жоқ."}
+};
+
+let lang=localStorage.getItem("alasummitLang")||null, filter="all", query="", fav=[];
+try{fav=JSON.parse(localStorage.getItem("alasummitFav")||"[]")}catch(e){fav=[]}
+let watchId=null, lastPos=null, track=[];
+
+function T(k){return (tr[lang]||tr.en)[k]||tr.en[k]||k}
+function nameOf(p){return lang==="kk"?p.kk:lang==="ru"?p.ru:p.en}
+function saveFav(){try{localStorage.setItem("alasummitFav",JSON.stringify(fav))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function toast(s){let x=document.getElementById("toast");x.textContent=s;x.classList.add("show");clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove("show"),2400)}
+function openModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("modal").classList.add("open")}
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i]").forEach(x=>x.innerHTML=T(x.dataset.i));
+  document.querySelectorAll("[data-i-placeholder]").forEach(x=>x.placeholder=T(x.dataset.iPlaceholder));
+  document.getElementById("langBtn").innerHTML=`🌐 <span>${lang==="kk"?"Қазақша":lang==="ru"?"Русский":"English"}</span>`;
+  render();
+}
+function chooseLang(){
+  openModal(T("choose"),`<div class="langgrid"><button class="lang" onclick="setLang('ru')">🇷🇺 Русский</button><button class="lang" onclick="setLang('kk')">🇰🇿 Қазақша</button><button class="lang" onclick="setLang('en')">🇬🇧 English</button></div>`);
+}
+function setLang(x){lang=x;try{localStorage.setItem("alasummitLang",x)}catch(e){}document.getElementById("modal").classList.remove("open");applyLang()}
+function filtered(){
+ return peaks.filter(p=>{
+  let q=query.trim().toLowerCase(), n=[p.name,p.kk,p.ru,p.en].join(" ").toLowerCase();
+  return (filter==="all"||p.level===filter)&&(!q||n.includes(q))&&(!window.onlyFav||fav.includes(p.id))
+ })
+}
+function render(){
+ const g=document.getElementById("grid"),list=filtered();
+ if(!list.length){g.innerHTML=`<div class="empty"><div style="font-size:38px">🔎</div><h3>${T("noFav")}</h3><p class="muted">${T("notVerified")}</p><button class="btn primary" onclick="resetAll()">${T("all")}</button></div>`;return}
+ g.innerHTML=list.map(p=>`
+ <article class="card">
+  <div class="photo"><img loading="lazy" src="${p.photo}" alt="${esc(nameOf(p))}" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#b6c8c0,#e9dfc8)'"><span class="level">${T(p.level)}</span><button class="fav" onclick="toggleFav('${p.id}')">${fav.includes(p.id)?"♥":"♡"}</button></div>
+  <div class="body"><div class="title"><h3>${esc(nameOf(p))}</h3></div><div class="facts"><span class="fact">${p.height}</span><span class="fact">${T(p.level)}</span></div><p>${esc(lang==="kk"?p.kkd:lang==="ru"?p.rud:p.desc)}</p><div class="cardbuttons"><button class="btn primary" onclick="openPeak('${p.id}')">${T("routes")}</button><button class="btn" onclick="toggleFav('${p.id}')">${fav.includes(p.id)?"♥":"♡"}</button></div></div>
+ </article>`).join("");
+}
+function toggleFav(id){fav=fav.includes(id)?fav.filter(x=>x!==id):[...fav,id];saveFav();render();toast(fav.includes(id)?"♥":"♡")}
+function resetAll(){filter="all";query="";window.onlyFav=false;document.getElementById("search").value="";document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));render()}
+function openPeak(id){
+ const p=peaks.find(x=>x.id===id);if(!p)return;
+ document.getElementById("home").classList.add("hidden");document.getElementById("detail").classList.add("active");
+ document.getElementById("detailContent").innerHTML=`
+ <div class="detailhero"><div class="copy"><span class="tag">${T("demo")}</span><div class="eyebrow" style="margin-top:13px">${T(p.level)} · ${p.height}</div><h1>${esc(nameOf(p))}</h1><p>${esc(lang==="kk"?p.kkd:lang==="ru"?p.rud:p.desc)}</p><button class="btn" onclick="toggleFav('${p.id}')">${fav.includes(p.id)?"♥":"♡"} ${fav.includes(p.id)?T("gold"):T("bronze")}</button></div><div class="detailphoto"><img src="${p.photo}" alt="${esc(nameOf(p))}"></div></div>
+ <div class="tabs"><button class="tab active" data-tab="route">${T("routes")}</button><button class="tab" data-tab="gear">${T("gear")}</button><button class="tab" data-tab="safety">${T("safety")}</button><button class="tab" data-tab="start">${T("start")}</button><button class="tab" data-tab="gps">${T("gps")}</button></div>
+ <div class="twocol"><div class="panel" id="tab"></div><aside class="panel"><div class="notice">${esc(T("demo2"))}</div><div style="height:9px"></div><div class="warning">${esc(T("notVerified"))}</div></aside></div>`;
+ document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");showTab(b.dataset.tab,p)});
+ showTab("route",p);window.scrollTo({top:0,behavior:"smooth"});
+}
+function showTab(tab,p){
+ const b=document.getElementById("tab");if(!b)return;
+ if(tab==="route")b.innerHTML=`<h3>${T("routes")}</h3><div class="route"><h4>${esc(nameOf(p))}</h4><p>${esc(T("notVerified"))}</p></div><div class="route"><h4>${T("offline")}</h4><p>${esc(T("noTrack"))}</p><label class="btn soft filelabel">📂 ${T("load")}<input id="gpx" type="file" accept=".gpx,application/gpx+xml"></label></div><div id="routeMap"></div>`;
+ if(tab==="gear")b.innerHTML=`<h3>${T("gear")}</h3><ul class="list">${(lang==="kk"?["су","ыңғайлы треккинг аяқ киімі","қабатты киім","жаңбыр/желден қорғайтын киім","зарядталған телефон","алғашқы көмек қобдишасы"]:lang==="ru"?["вода","удобная треккинговая обувь","слои одежды","защита от дождя и ветра","заряженный телефон","аптечка"]:["water","comfortable hiking shoes","layers of clothing","rain/wind protection","charged phone","first-aid kit"]).map(x=>`<li>${x}</li>`).join("")}</ul>`;
+ if(tab==="safety")b.innerHTML=`<h3>${T("safety")}</h3><div class="warning">${lang==="kk"?"Биіктік, суық, жел және ауа райының өзгеруі маңызды. Өз жағдайыңды бақыла және жоспарды ауа райына қарай өзгерт.":lang==="ru"?"Высота, холод, ветер и смена погоды важны. Следи за самочувствием и меняй план по условиям.":"Altitude, cold, wind and changing weather matter. Monitor how you feel and change the plan when conditions change."}</div>`;
+ if(tab==="start")b.innerHTML=`<h3>${T("start")}</h3><div class="route"><h4>${lang==="kk"?"Ерте бастауға жоспарла":"Планируй запас времени"}</h4><p>${lang==="ru"?"Для длительного похода оставляй запас времени на спуск до темноты. Точное время старта зависит от сезона, маршрута и погоды.":lang==="kk"?"Ұзақ жорықта қараңғыға дейін түсуге уақыт қалдыр. Нақты басталу уақыты маусымға, маршрутқа және ауа райына байланысты.":"For a long hike, leave enough time to descend before dark. Exact start time depends on season, route and weather."}</p></div>`;
+ if(tab==="gps")b.innerHTML=gpsHTML();
+ if(tab==="route"){setTimeout(()=>{const f=document.getElementById("gpx");if(f)f.onchange=e=>loadGPX(e.target.files[0])},0);drawTrack()}
+}
+function gpsHTML(){
+ return `<div class="gpsbox"><h3>${T("gps")}</h3><p>${T("footer3")}</p><div class="gpsgrid"><div class="gpsstat"><small>${T("lat")}</small><strong id="lat">—</strong></div><div class="gpsstat"><small>${T("lon")}</small><strong id="lon">—</strong></div><div class="gpsstat"><small>${T("accuracy")}</small><strong id="acc">—</strong></div><div class="gpsstat"><small>${T("alt")}</small><strong id="alt">—</strong></div><div class="gpsstat"><small>${T("status")}</small><strong id="gpsstatus">${T("waiting")}</strong></div></div><button class="btn primary" id="gpsStart">${watchId===null?T("startGPS"):T("stopGPS")}</button></div><div style="height:12px"></div><div class="mapbox" id="gpsMap"><div class="maphint">${T("offline")}</div><svg viewBox="0 0 800 500"><path id="trackPath" d="" fill="none" stroke="#216b53" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle id="userDot" cx="-20" cy="-20" r="9" fill="#8f3828"/></svg></div>`;
+}
+function startGPS(){
+ if(!navigator.geolocation){setGPSStatus(T("unsupported"));return}
+ if(watchId!==null){navigator.geolocation.clearWatch(watchId);watchId=null;setGPSStatus(T("waiting"));return}
+ setGPSStatus(T("waiting"));
+ watchId=navigator.geolocation.watchPosition(pos=>{
+  lastPos=pos.coords;setText("lat",pos.coords.latitude.toFixed(6));setText("lon",pos.coords.longitude.toFixed(6));setText("acc",Math.round(pos.coords.accuracy)+" m");setText("alt",pos.coords.altitude==null?"—":Math.round(pos.coords.altitude)+" m");setGPSStatus(T("active"));
+ },()=>{setGPSStatus(T("denied"));watchId=null},{enableHighAccuracy:true,maximumAge:5000,timeout:15000});
+}
+function setGPSStatus(s){let x=document.getElementById("gpsstatus");if(x)x.textContent=s}
+function setText(id,s){let x=document.getElementById(id);if(x)x.textContent=s}
+function loadGPX(file){
+ if(!file)return;
+ const r=new FileReader();
+ r.onload=()=>{try{const xml=new DOMParser().parseFromString(r.result,"application/xml");const pts=[...xml.getElementsByTagName("trkpt")].map(x=>({lat:+x.getAttribute("lat"),lon:+x.getAttribute("lon")})).filter(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lon));if(!pts.length)throw 0;track=pts;try{indexedDB.open("alasummit",1).onupgradeneeded=e=>e.target.result.createObjectStore("gpx");indexedDB.open("alasummit",1).onsuccess=e=>{let db=e.target.result,tx=db.transaction("gpx","readwrite");tx.objectStore("gpx").put(r.result,"last");}}catch(e){}drawTrack();toast(T("loadOk"))}catch(e){toast(T("badGpx"))}};
+ r.readAsText(file);
+}
+function drawTrack(){
+ const path=document.getElementById("trackPath");if(!path)return;
+ if(!track.length){path.setAttribute("d","");return}
+ const minLat=Math.min(...track.map(x=>x.lat)),maxLat=Math.max(...track.map(x=>x.lat)),minLon=Math.min(...track.map(x=>x.lon)),maxLon=Math.max(...track.map(x=>x.lon)),pad=45;
+ const sx=x=>pad+(x-minLon)/((maxLon-minLon)||1)*(800-pad*2),sy=y=>500-pad-(y-minLat)/((maxLat-minLat)||1)*(500-pad*2);
+ path.setAttribute("d",track.map((p,i)=>(i?"L":"M")+sx(p.lon).toFixed(1)+" "+sy(p.lat).toFixed(1)).join(" "));
+}
+document.getElementById("back").onclick=()=>{document.getElementById("detail").classList.remove("active");document.getElementById("home").classList.remove("hidden");render();window.scrollTo({top:0,behavior:"smooth"})};
+document.getElementById("langBtn").onclick=chooseLang;
+document.getElementById("close").onclick=()=>document.getElementById("modal").classList.remove("open");
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")e.target.classList.remove("open")};
+document.getElementById("gpsTop").onclick=()=>{if(!document.getElementById("detail").classList.contains("active"))openPeak(peaks[0].id);setTimeout(()=>{document.querySelector('[data-tab="gps"]')?.click()},80)};
+document.getElementById("favTop").onclick=()=>{window.onlyFav=!window.onlyFav;render()};
+document.getElementById("search").oninput=e=>{query=e.target.value;render()};
+document.getElementById("clear").onclick=resetAll;
+document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{filter=c.dataset.filter;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("active",x===c));render()});
+document.addEventListener("click",e=>{if(e.target.id==="gpsStart")startGPS()});
+
+if(!lang)chooseLang(); else applyLang();
+</script>
+</body>
+</html>
